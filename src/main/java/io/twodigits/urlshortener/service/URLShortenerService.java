@@ -1,15 +1,21 @@
 package io.twodigits.urlshortener.service;
 
+import io.twodigits.urlshortener.exceptions.URLShortenerException;
+import io.twodigits.urlshortener.model.Redirection;
+import io.twodigits.urlshortener.model.RedirectionInfo;
 import io.twodigits.urlshortener.model.URL;
+import io.twodigits.urlshortener.model.URLRedirection;
 
+import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 public interface URLShortenerService {
     /**
      * Get a list of all URLs that belong to a user.
      *
      * @param user
-     * @return a list of users
+     * @return a collection of users
      */
     Iterable<URL> listURLs(String user);
 
@@ -17,10 +23,11 @@ public interface URLShortenerService {
      * Add a new URL to the collection of URLs for a user.
      *
      * @param user
-     * @param url
+     * @param urlRedirection
      * @return The URL object which has been created
+     * @throws URLShortenerException
      */
-    URL addURL(String user, String url);
+    URL addURL(String user, URLRedirection urlRedirection) throws URLShortenerException;
 
     /**
      * Get a specific URL of a user by its ID.
@@ -33,10 +40,10 @@ public interface URLShortenerService {
     /**
      * Return a specific URL by ID.
      *
-     * @param id
+     * @param shortUrl
      * @return The URL object
      */
-    Optional<URL> getURL(String id);
+    Optional<URL> getURL(String shortUrl);
 
     /**
      * Delete a specific URL which belongs to a user.
@@ -44,4 +51,22 @@ public interface URLShortenerService {
      * @param id
      */
     void deleteURL(String user, String id);
+
+    /**
+     * Searches for the original URL
+     * @param shortUrl
+     * @param redirectionInfo additional info
+     * @return
+     * @throws URLShortenerException
+     */
+    String getRedirectionUrl (String shortUrl, RedirectionInfo redirectionInfo) throws URLShortenerException;
+
+    /**
+     * Get statistics for URL
+     * @param user
+     * @param id
+     * @return
+     * @throws URLShortenerException
+     */
+    Iterable<Redirection> getStatistic (String user, String id) throws URLShortenerException;
 }

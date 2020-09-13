@@ -2,9 +2,11 @@ package io.twodigits.urlshortener.repository;
 
 import io.twodigits.urlshortener.model.URL;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
+@Repository
 public interface URLRepository extends CrudRepository<URL, String> {
 
     /**
@@ -20,8 +22,22 @@ public interface URLRepository extends CrudRepository<URL, String> {
      *
      * @param id the unique ID of an URL
      * @param user the ID of a user
-     * @return a collection of URL objects
+     * @return a url
      */
     Optional<URL> findByIdAndUser(String id, String user);
 
+    /**
+     * Find a URL by the short url and user
+     * @param shortUrl
+     * @param user
+     * @return
+     */
+    Optional<URL> findByShortUrlAndUser(String shortUrl, String user);
+
+    /**
+     * Find a URL by the short url
+     * @param shortUrl
+     * @return
+     */
+    Optional<URL> findByShortUrl(String shortUrl);
 }
