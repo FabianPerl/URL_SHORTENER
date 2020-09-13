@@ -21,6 +21,15 @@ Thank you for taking your time.
 
 **Happy coding!**
 
+## TODO 
+- [ ] Create PUT Method to change short URL by the creator
+- [ ] Validation of user input
+- [ ] Appropriate UUID-Algorithm
+- [ ] User Authentication
+
+## Notice
+The program was changed at the beginning. Now a Unique ID is used to store the links, so that a short URL can be changed anytime by the creator
+
 ## Work with the Project
 
 ### Build
@@ -41,3 +50,38 @@ java -jar target/url-shortener.jar
 
 After a few seconds the application should have started successfully. You can access the Web Service endpoints via
 [http://localhost:8080](http://localhost:8080) now.
+
+## Commands
+
+### POST: Add url (shortUrl is optional)
+
+`http://localhost:8080/{user}/url`
+```json
+{
+  "longUrl": "https://www.convertjson.com/json-to-xml.htm",
+  "shortUrl": "Test2"
+}
+```
+```xml
+<?xml version="1.0" encoding="UTF-8" ?>
+<root>
+  <longUrl>https://www.convertjson.com/json-to-xml.htm</longUrl>
+  <shortUrl>Test2</shortUrl>
+</root>
+```
+
+### GET: ListUrls
+
+`http://localhost:8080/{user}/listUrls`
+
+### DELETE: Delete url
+
+`http://localhost:8080/{user}/url/{id}`
+
+### GET: Show Statistic
+
+`http://localhost:8080/{user}/statistic/{id}`
+
+### GET: Get Url
+
+`http://localhost:8080/url/{id}`
